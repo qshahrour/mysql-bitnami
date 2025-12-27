@@ -1,0 +1,27 @@
+name: Deploy Helm Chart to EKS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Helm lint
+        run: helm lint helm/
+
+      - name: Deploy Helm chart
+        run: |
+          helm upgrade --install mysql helm/ \
+          --namespace live \
+          --create-namespace \
+          --values helm/values.yaml
+
+      - name: Package Helm chart
+        run: |
+          helm package helm/
+          helm repo index .
