@@ -1,4 +1,4 @@
-name: Deploy Helm Chart to EKS
+name: UnDeploy Helm Chart to EKS
 
 on:
   workflow_dispatch:
