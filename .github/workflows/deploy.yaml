@@ -11,6 +11,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Helm dependency build
+        run: helm dependency build helm/
+        
       - name: Helm lint
         run: helm lint helm/
 
